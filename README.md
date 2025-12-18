@@ -23,7 +23,7 @@ Clone this repository into your custom addons folder or a directory of your choi
 
 **Linux / macOS / Windows Terminal:**
 ```bash
-git https://github.com/ahmedellaban1/digizilla.git
+git clone https://github.com/ahmedellaban1/digizilla.git
 ```
 
 ### 2. Configure `odoo.conf`
