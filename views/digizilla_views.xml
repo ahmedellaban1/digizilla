@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- LIST VIEW -->
+        <record id="digizilla_list_view" model="ir.ui.view">
+            <field name="name">digizilla.list</field>
+            <field name="model">digizilla.digizilla</field>
+            <field name="arch" type="xml">
+                <tree string="Digizilla">
+                    <field name="name" />
+                    <field name="gender" />
+                    <field name="country_id" />
+                    <field name="joining_date" />
+                    <field name="company_id" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- FORM VIEW -->
+        <record id="digizilla_form_view" model="ir.ui.view">
+            <field name="name">digizilla.form</field>
+            <field name="model">digizilla.digizilla</field>
+            <field name="arch" type="xml">
+                <form string="Digizilla">
+                    <sheet>
+                        <h1>
+                            <field name="name" placeholder="Name" />
+                        </h1>
+                        
+                        <group>
+                            <field name="gender" />
+                            <field name="company_id" />
+                            <field name="country_id" />
+                            <field name="joining_date" />
+                        </group>
+
+                        <group>
+                            <field name="tag_ids" widget="many2many_tags" />
+                            <field name="customer_ids" widget="many2many" />
+                        </group>
+
+                        <notebook>
+                            <page string="Notes">
+                                <field name="notes" nolabel="1" placeholder="Enter notes here..." />
+                            </page>
+                            <page string="Comments">
+                                <field name="comments" nolabel="1" placeholder="Enter comments here..." />
+                            </page>
+                            <page string="Messages and Logger">
+                                <div class="o_mail_activity">
+                                    <field name="activity_ids" widget="mail_activity" />
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- KANBAN VIEW -->
+        <record id="digizilla_kanban_view" model="ir.ui.view">
+            <field name="name">digizilla.kanban</field>
+            <field name="model">digizilla.digizilla</field>
+            <field name="arch" type="xml">
+                <kanban string="Digizilla" default_group_by="gender">
+                    <field name="id" />
+                    <field name="name" />
+                    <field name="gender" />
+                    <field name="country_id" />
+                    <field name="joining_date" />
+                    <field name="company_id" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card">
+                                <div class="oe_kanban_content">
+                                    <h4><field name="name" /></h4>
+                                    <p><strong>Gender:</strong> <field name="gender" /></p>
+                                    <p><strong>Country:</strong> <field name="country_id" /></p>
+                                    <p><strong>Company:</strong> <field name="company_id" /></p>
+                                    <p><strong>Joining Date:</strong> <field name="joining_date" /></p>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- ACTION -->
+        <record id="digizilla_action" model="ir.actions.act_window">
+            <field name="name">Digizilla</field>
+            <field name="res_model">digizilla.digizilla</field>
+            <field name="view_mode">kanban,list,form</field>
+        </record>
+
+        <!-- MENU -->
+        <menuitem id="digizilla_menu_root" name="Digizilla" />
+        <menuitem id="digizilla_menu" parent="digizilla_menu_root" name="Digizilla" action="digizilla_action" />
+    </data>
+</odoo>

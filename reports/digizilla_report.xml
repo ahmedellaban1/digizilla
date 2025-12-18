@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="digizilla_report_action"
+            model="digizilla.digizilla"
+            string="Digizilla Report"
+            report_type="qweb-pdf"
+            name="Digizilla.digizilla_report_template"
+            file="Digizilla.digizilla_report" />
+    </data>
+</odoo>

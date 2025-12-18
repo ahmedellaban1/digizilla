@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="digizilla_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h2>Digizilla Report</h2>
+                            <table class="table table-sm table-bordered">
+                                <tr>
+                                    <th>Name</th>
+                                    <td><t t-esc="doc.name" /></td>
+                                </tr>
+                                <tr>
+                                    <th>Gender</th>
+                                    <td><t t-esc="dict(doc._fields['gender'].selection).get(doc.gender, '-')" /></td>
+                                </tr>
+                                <tr>
+                                    <th>Country</th>
+                                    <td><t t-esc="doc.country_id.name if doc.country_id else '-'" /></td>
+                                </tr>
+                                <tr>
+                                    <th>Joining Date</th>
+                                    <td><t t-esc="doc.joining_date if doc.joining_date else '-'" /></td>
+                                </tr>
+                                <tr>
+                                    <th>Company</th>
+                                    <td><t t-esc="doc.company_id.name" /></td>
+                                </tr>
+                                <tr>
+                                    <th>Tags</th>
+                                    <td>
+                                        <t t-foreach="doc.tag_ids" t-as="tag">
+                                            <span class="badge badge-info"><t t-esc="tag.name" /></span>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <h4 style="margin-top: 20px;">Customers</h4>
+                            <t t-if="doc.customer_ids">
+                                <table class="table table-sm table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Customer</th>
+                                            <th>Email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="doc.customer_ids" t-as="cust">
+                                            <tr>
+                                                <td><t t-esc="cust.name" /></td>
+                                                <td><t t-esc="cust.email or '-'" /></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </t>
+                            <t t-else="1">
+                                <p>No customers assigned.</p>
+                            </t>
+
+                            <h4 style="margin-top: 20px;">Notes</h4>
+                            <p><t t-esc="doc.notes or '-'" /></p>
+
+                            <h4 style="margin-top: 20px;">Comments</h4>
+                            <p><t t-esc="doc.comments or '-'" /></p>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
